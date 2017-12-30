@@ -1,4 +1,5 @@
-# hfut-qiangke
+# hfut-course
+
 
 这是一个选课的脚本，为了抢到python课程开发出来的(来自非酋的怨念)
 
