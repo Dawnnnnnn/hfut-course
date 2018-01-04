@@ -42,24 +42,23 @@ def Add_course(username,password):
     info_url = 'http://jxglstu.hfut.edu.cn/eams5-student/for-std/student-info'
     res = s.get(info_url)
     id = res.url[-5:]
-
     for i in lessonAssoc:
-        data = {'studentAssoc': id, 'lessonAssoc': i,
+        while 1:
+            data = {'studentAssoc': id, 'lessonAssoc': i,
                 'courseSelectTurnAssoc': courseSelectTurnAssoc, 'scheduleGroupAssoc': '', 'virtualCost': virtualCost}
-        response = s.post(url, data=data)
-        temp = response.text
-        data1 = {'studentId': id, 'requestId': temp}
-        response1 = s.post(url1, data=data1)
-        data2 = {'lessonIds[]':i}
-        response2 = s.post(url2,data=data2)
-        print("选课是否成功:",response1.json()['success'])
-        temp = response2.json()
-        value = list(temp.values())
-        print("当前课程选课人数:",value)
-        time.sleep(0.01)
+            response = s.post(url, data=data)
+            temp = response.text
+            data1 = {'studentId': id, 'requestId': temp}
+            response1 = s.post(url1, data=data1)
+            data2 = {'lessonIds[]':i}
+            response2 = s.post(url2,data=data2)
+            print("选课状态:",response1.json())
+            temp = response2.json()
+            value = list(temp.values())
+            print("当前课程选课人数:",value)
+            time.sleep(0.5)
 
 
-while 1:
-    Add_course(username,password)
-    time.sleep(0.01)
+Add_course(username,password)
+
 
